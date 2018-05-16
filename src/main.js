@@ -1,22 +1,26 @@
 import _ from 'lodash';
 import printMe from './print.js';
-import './styles.css';
+// import './styles.css';
+
+
+if (process.env.NODE_ENV !== 'production') {
+   console.log('Looks like we are in development mode!');
+ }
+
 
 function component() {
+
   var element = document.createElement('div');
-  var btn = document.createElement('button');
 
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    // lodash 是由当前 script 脚本 import 导入进来的
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.onclick = printMe.bind(null, 'Hello webpack!');
 
-  btn.innerHTML = 'Click me and check the console!';
-  btn.onclick = printMe;
+    return element;
 
-  element.appendChild(btn);
-
-  return element;
 }
 
-document.body.appendChild(component());
+   document.body.appendChild(component());
 
 if (module.hot) {
    module.hot.accept('./print.js', function() {
