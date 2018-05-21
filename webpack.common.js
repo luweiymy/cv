@@ -4,16 +4,68 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   entry: './src/main.js',
+  module:{
+    rules:[
+       {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+           'file-loader'
+         ]
+       },
+       {
+         test: /\.(woff|woff2|eot|ttf|otf)$/,
+         use: [
+           'file-loader'
+         ]
+       },
+       {
+         test: /\.(csv|tsv)$/,
+         use: [
+           'csv-loader'
+         ]
+       },
+       {
+         test: /\.xml$/,
+         use: [
+           'xml-loader'
+         ]
+       },
+       {
+          test:/\.vue$/,
+          use: [
+            'vue-loader'
+          ]
+        }
+    ]
+  },
+  //
+  resolve: {
+    extensions: ['.js', '.vue'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js' // 用 webpack 1 时需用 'vue/dist/vue.common.js'
+    }
+  },
   plugins: [
     // 清理文件
     new CleanWebpackPlugin(['dist']),
     // HtmlWebpackPlugin 创建了一个全新的文件，所有的 bundle 会自动添加到 html 中
     new HtmlWebpackPlugin({
+      // Required
+      inject: false,
+      template: require('html-webpack-template'),
+
+      // Optional
+      appMountId: 'app',
       title: '丫丫1'
     }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'common' // 指定公共 bundle 的名称。
-    // })
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.SplitChunksPlugin({
       cacheGroups: {
           default: {
@@ -40,7 +92,7 @@ module.exports = {
   ],
   output: {
     // filename: '[name].[chunkhash].js',
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[hash].js',
     // chunkFilename: '[name].bundle.js',其他的js文件
     path: path.resolve(__dirname, 'dist')
   }
