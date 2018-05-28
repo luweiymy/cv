@@ -6,12 +6,26 @@ module.exports = {
   entry: './src/main.js',
   module:{
     rules:[
-       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+      //  {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader'
+      //   ]
+      // },
+      {
+        test: /\.less$/,
+        use: [{
+            loader: "style-loader"
+        }, {
+            loader: "css-loader", options: {
+                sourceMap: true
+            }
+        }, {
+            loader: "less-loader", options: {
+                sourceMap: true
+            }
+        }]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -42,6 +56,16 @@ module.exports = {
           use: [
             'vue-loader'
           ]
+        },
+        {
+          test: /\.js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
         }
     ]
   },
