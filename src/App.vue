@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="less">
-@color:red;
+@color:yellow;
 body{
   background: @color;
 }
