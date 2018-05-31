@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Vue from 'vue';
 import App from './App';
-
+import Styles from './styles.less';
 
 if (process.env.NODE_ENV !== 'production') {
    console.log('Looks like we are in development mode!');

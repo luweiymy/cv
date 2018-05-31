@@ -1,20 +1,21 @@
 <template lang="html">
-  <h1>{{msg}}</h1>
+  <div class="main">
+    <About></About>
+  </div>
 </template>
 
 <script>
+import About from './components/about';
 export default {
   data () {
     return {
       msg : 'ymy first vue project'
     }
-  }
+  },
+  components: {About}
 }
 </script>
 
 <style lang="less">
-@color:yellow;
-body{
-  background: @color;
-}
+
 </style>

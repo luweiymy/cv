@@ -80,7 +80,7 @@ module.exports = {
 
       // Optional
       appMountId: 'app',
-      title: '丫丫1'
+      title: '梦雅的简历'
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.SplitChunksPlugin({
@@ -111,6 +111,7 @@ module.exports = {
     // filename: '[name].[chunkhash].js',
     filename: '[name].[hash].js',
     // chunkFilename: '[name].bundle.js',其他的js文件
-    path: path.resolve(__dirname, 'dist')
+    // path: path.resolve(__dirname, 'dist'),
+    path: __dirname + '/dist'
   }
 }
